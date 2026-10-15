@@ -1,7 +1,7 @@
 # Temporary interactive launcher; compatible with Windows PowerShell 5.1 and PowerShell 7+.
 [CmdletBinding()]
 param(
-    [string]$Tag = 'v0.2.0-m1',
+    [string]$Tag = 'v0.2.1-m1',
     [string]$BaseUrl = 'https://github.com/gongshuiwen/remote-assist-releases/releases/download',
     [string]$Invite = ''
 )
