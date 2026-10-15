@@ -12,7 +12,19 @@
 4. 粘贴完整的 HTTPS 邀请链接，核对服务端、工程师身份、故障说明、权限范围与有效时间，再决定是否开始协助。
 5. 默认只允许只读的基本信息共享。命令执行须由客户在本机选择开启，默认**每条确切命令都需要客户本机单独批准**。客户也可在本机明确选择仅本次临时会话有效的**完全访问**；界面会提示此时命令无需逐条确认，以当前用户身份执行。客户可随时撤销授权或结束协助，授权到期后失效；新会话不会继承完全访问，断线重连也不会重放任务。
 
-客户无需创建 GitHub 账户，无需安装 Go / Node.js / Python。启动脚本 `connect.ps1` / `connect.sh` 是技术用户的可选入口，必须从可信发布资产下载、审阅后运行；不要执行来路不明的远程脚本。
+客户无需创建 GitHub 账户，无需安装 Go / Node.js / Python。启动脚本 `connect.ps1` / `connect.sh` 是技术用户的可选入口，必须从可信发布仓库或发布资产获取、审阅后运行；不要执行来路不明的远程脚本。
+
+## Windows 一行启动
+
+确认这是可信的分发仓库，并审阅 [connect.ps1](connect.ps1) 后，在普通权限的 PowerShell 5.1 或 PowerShell 7 中粘贴：
+
+```powershell
+& ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/gongshuiwen/remote-assist-releases/main/connect.ps1')))
+```
+
+脚本自动识别 Windows x64 / ARM64，下载固定版本 `v0.2.0-m1` 的 Agent 和 `SHA256SUMS`，校验通过后启动本机中文授权窗口，退出后尝试清理临时文件。下载或校验失败会停止运行，无需手工下载 EXE，也不会申请管理员权限或修改 PowerShell 执行策略。客户仍须在本机决定是否授权；请在授权窗口粘贴邀请链接。
+
+仓库根目录的脚本与本版本 Release 附带的 `connect.ps1` 来自同一已发布脚本。`main` 地址跟随仓库维护更新；需要固定版本时，可将命令中的 URL 换为 [v0.2.0-m1 的脚本地址](https://github.com/gongshuiwen/remote-assist-releases/releases/download/v0.2.0-m1/connect.ps1)。
 
 ## 版本与安全提示
 
