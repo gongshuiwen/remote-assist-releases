@@ -22,9 +22,9 @@
 & ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/gongshuiwen/remote-assist-releases/main/connect.ps1')))
 ```
 
-脚本自动识别 Windows x64 / ARM64，下载固定版本 `v0.2.0-m1` 的 Agent 和 `SHA256SUMS`，校验通过后启动本机中文授权窗口，退出后尝试清理临时文件。下载或校验失败会停止运行，无需手工下载 EXE，也不会申请管理员权限或修改 PowerShell 执行策略。客户仍须在本机决定是否授权；请在授权窗口粘贴邀请链接。
+脚本自动识别 Windows x64 / ARM64，下载脚本中固定的已成功发布版本 Agent 和 `SHA256SUMS`，校验通过后启动本机中文授权窗口，退出后尝试清理临时文件。下载或校验失败会停止运行，无需手工下载 EXE，也不会申请管理员权限或修改 PowerShell 执行策略。客户仍须在本机决定是否授权；请在授权窗口粘贴邀请链接。
 
-仓库根目录的脚本与本版本 Release 附带的 `connect.ps1` 来自同一已发布脚本。`main` 地址跟随仓库维护更新；需要固定版本时，可将命令中的 URL 换为 [v0.2.0-m1 的脚本地址](https://github.com/gongshuiwen/remote-assist-releases/releases/download/v0.2.0-m1/connect.ps1)。
+仓库根目录的脚本固定为已成功发布的版本，随发布流水线更新；其内容与对应 Release 的启动脚本一致。`main` 地址随版本更新；需要固定版本时，可将命令中的 URL 换为具体 Release 的脚本地址，例如已经发布的 [v0.2.0-m1 脚本](https://github.com/gongshuiwen/remote-assist-releases/releases/download/v0.2.0-m1/connect.ps1)。
 
 ## 版本与安全提示
 
@@ -36,4 +36,4 @@
 - Agent 包含 Go 运行时，其 BSD 许可通知见 [GO-LICENSE](GO-LICENSE)；该通知不授予 Remote Assist 应用本身的开源许可。
 - 如遇异常，请先停止协助并通过已有的可信渠道联系工程师。不要将邀请码、会话令牌、敏感日志或漏洞详情提交到公开 Issue。
 
-**发布方式**：构建版本经人工审阅与发行决策，并通过 CI 回归后，由维护者本地上传发布资产。发布后从公开 Releases 下载资产，按 `SHA256SUMS` 验证完整性。Release 页面没有列出的版本即未公开发布。
+**发布方式**：后续版本经人工审阅与发行决策，由维护者明确推送新版本 Tag 后，私有源码仓库的流水线自动构建并执行 CI 回归。通过后发布六种 Agent、两个启动脚本、`GO-LICENSE` 与 `SHA256SUMS` 共 10 个附件；全部附件匿名下载与校验通过后，再同步公开仓库根目录的 `connect.ps1` / `connect.sh`。已有 Release 和 Tag 不自动覆盖。Release 页面没有列出的版本即未公开发布。
